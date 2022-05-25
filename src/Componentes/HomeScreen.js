@@ -1,10 +1,28 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
+import { Link , useNavigate } from "react-router-dom"
+import axios from "axios"
 
-export default function HomeScreen({email , setEmail , password , setPassword}){
+export default function HomeScreen({email , setEmail , password , setPassword , setToken}){
 
-console.log(email)
-console.log(password)
+    const navigate= useNavigate()
+    function login(){
+        const body={
+            email,
+            password  
+        }
+          const promise= axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login' , body)
+         
+          promise
+          .then(res=>{
+              console.log(res.data)
+              setToken (res.data.token)
+              navigate.push("/habitos")
+          })
+          .catch(err=>{
+              console.log("erro")
+          })
+
+    }
     return(
         <>
         <Container>
@@ -12,7 +30,7 @@ console.log(password)
             <InputEmail placeholder=" email" onChange={(e)=> setEmail(e.target.value)} value={email} required/>
             <InputPassword type="password" placeholder=" senha" onChange={(e)=> setPassword(e.target.value)} value={password} required/>
             <Link to="/habitos">
-               <LogIn> Entrar </LogIn>
+               <LogIn onClick={login} > Entrar </LogIn>
             </Link>
             <Link to="/cadastro">
                <Register>Não tem uma conta? Cadastre-se!</Register>

@@ -6,7 +6,10 @@ export default function History(){
     return(
         <>
          <Footer/>
-        <Displaying></Displaying>
+        <Displaying>
+
+            
+        </Displaying>
         <Navbar/>
         </>
     )

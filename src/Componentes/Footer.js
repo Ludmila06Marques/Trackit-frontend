@@ -1,16 +1,23 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { CircularProgressbar, CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
-export default function Footer(){
+
+export default function Footer(props){
+    const {score}=props
     return(
         <>
         <Content>
-            <Link to="/habitos">
-        <Habits> Habitos</Habits>
+         <Link to="/habitos">
+           <Habits> Habitos</Habits>
         </Link>
-        <Progress/>
+        <Progress>  
+            <CircularProgressbar/>
+           
+         </Progress>
         <Link to="/historico">
-        <Historic> Historico</Historic>
+           <Historic> Historico</Historic>
         </Link>
         </Content>
         </>

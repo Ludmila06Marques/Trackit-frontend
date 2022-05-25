@@ -1,6 +1,30 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
-export default function RegisterScreen({email , setEmail , password , setPassword , name , setName , picture , setPicture}){
+import { Link  , useNavigate} from "react-router-dom"
+import { useState } from "react"
+import axios from "axios"
+
+export default function RegisterScreen({email , setEmail , password , setPassword , name , setName , image  , setImage}){
+
+    const navigate= useNavigate()
+  function singUp(){
+    const body={
+        email,
+        name,
+        image,
+        password  
+    }
+      const promise= axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up' , body)
+     
+      promise
+      .then(res=>{
+          console.log(res.data)     
+          navigate.push("/")
+      })
+      .catch(err=>{
+          console.log("erro")
+      })
+
+  }
    
     return(
         <>
@@ -9,10 +33,10 @@ export default function RegisterScreen({email , setEmail , password , setPasswor
             <InputEmail placeholder=" email" onChange={(e)=> setEmail(e.target.value)} value={email} required/>
             <InputPassword type="password" placeholder=" senha"onChange={(e)=> setPassword(e.target.value)} value={password} required/>
             <InputName placeholder=" nome"onChange={(e)=> setName(e.target.value)} value={name} required/>
-            <InputPicture placeholder=" foto"onChange={(e)=> setPicture(e.target.value)} value={picture} required/>
-            <Link to="/habitos">
-                <Register> Cadastrar </Register>
-            </Link>
+            <InputImage placeholder=" foto"onChange={(e)=> setImage(e.target.value)} value={image} required/>
+            
+                <Register onClick={singUp}> Cadastrar </Register>
+           
             <Link to="/">
                  <LogIn>Já tem uma conta? Faça login!</LogIn>
             </Link>
@@ -54,7 +78,7 @@ margin-top: 6px;
 border: solid #D4D4D4 1px;
 `
 
-const InputPicture=styled.input`
+const InputImage=styled.input`
 width: 303px;
 height: 45px;
 font-size: 20px;

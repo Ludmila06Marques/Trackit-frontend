@@ -45,3 +45,17 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+.hid{
+	display: none;
+}
+
+.nothing{
+	display: initial;
+}
+.selected{
+	background-color: #CFCFCF;
+
+}
+.selected h1{
+	color: #FFFFFF;
+}
