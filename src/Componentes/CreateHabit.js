@@ -1,23 +1,59 @@
 import styled from "styled-components"
 import Days from "./Days"
 import { useState } from "react"
+import NewHabit from "./NewHabit"
+import axios from "axios"
 
 
-export default function CreateHabit(){
+export default function CreateHabit({setHid, hid , setNothing , setHidHabit ,setNewHabit , newHabit ,setSelectedDay , selectedDay , token}){
 
     const [selectedCancel , setSelectedCancel]= useState(false)
     const [selectedSave , setSelectedSave]= useState(false)
+    console.log(token)
+
+    function createHabitSave(){
+
+        const config={
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        }
+        console.log(config)
+        
+        const body={
+            
+            name: newHabit,
+            days :selectedDay
+        }
+        console.log(body)
+        const promise= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits" , body  , config)
+
+        promise
+        .then(res=>{
+                setSelectedSave(true)
+                setHid("hid")
+                setNothing("hid")
+                setHidHabit("nothing")
+            console.log(res.data)     
+           
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
 
     return (
         <>
         <Content>
                 <Info>
-                    <Name placeholder="Nome do habito"/>
-                    <Days/>
+                    <Name placeholder="Nome do habito"onChange={(e)=> setNewHabit(e.target.value)} value={newHabit} required/>
+                    <Days selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
                 </Info>
             <Buttons>
-                <Cancel  onClick={()=>setSelectedCancel(true) } selectedCancel={selectedCancel}><h1>Cancelar</h1></Cancel>
-                <Save  onClick={()=>setSelectedSave(true) } selectedSave={selectedSave}><h1>Salvar</h1></Save>
+                <Cancel  onClick={( )=>{setSelectedCancel(true)
+                setHid("hid")
+                } } selectedCancel={selectedCancel}><h1>Cancelar</h1></Cancel>
+                <Save  onClick={createHabitSave } selectedSave={selectedSave }><h1>Salvar</h1></Save>
             </Buttons>
         </Content>
 

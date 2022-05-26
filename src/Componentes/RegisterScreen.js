@@ -18,10 +18,10 @@ export default function RegisterScreen({email , setEmail , password , setPasswor
       promise
       .then(res=>{
           console.log(res.data)     
-          navigate.push("/")
+          navigate("/")
       })
       .catch(err=>{
-          console.log("erro")
+          console.log(err)
       })
 
   }

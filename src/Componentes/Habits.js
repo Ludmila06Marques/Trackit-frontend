@@ -3,20 +3,24 @@ import Footer from "./Footer"
 import Navbar from "./Navbar"
 import Displaying from "./Displaying"
 import CreateHabit from "./CreateHabit"
-import {useState} from "react"
-import NewHabit from "./CreateHabit"
+import {useState , useEffect} from "react"
+import NewHabit from "./NewHabit"
+import axios from "axios"
 
 
 
 
 
-export default function Habits({token}){
+
+export default function Habits({token , hid , setHid , setNothing,nothing , hidHabit , setHidHabit , setNewHabit , newHabit , setSelectedDay , selectedDay }){
     console.log(token)
-    const [selected , setSelected]= useState("hid")
+    
     function addHabit(){
-        setSelected("nothing")
+        setHid("nothing")
     
     }
+
+
 
 
     return(
@@ -29,14 +33,15 @@ export default function Habits({token}){
             {/* Se nao tiver nenhum habito adicionado */}
 
             <Displaying>
-                 {/* Quando clicar no + esse componente NewHabit tem que aparecer
-                <CreateHabitWrapper className={selected}>
-                    <CreateHabit />
+                 {/* Quando clicar no + esse componente NewHabit tem que aparecer */}
+                <CreateHabitWrapper className={hid}>
+                    <CreateHabit setHid={setHid} hid={hid} setNothing={setNothing} setHidHabit={setHidHabit} setNewHabit={setNewHabit} newHabit={newHabit} setSelectedDay={setSelectedDay} selectedDay={selectedDay} token={token} />
                 </CreateHabitWrapper>
-                <NoHabits>
+                <NoHabits className={nothing}>
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </NoHabits>
-                */}
+                <NewHabit hidHabit={hidHabit} newHabit={newHabit} setNewHabit={setNewHabit} selectedDay={selectedDay}/>
+               
                
             </Displaying>
 
