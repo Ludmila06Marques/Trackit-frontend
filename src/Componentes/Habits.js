@@ -2,9 +2,10 @@ import styled from "styled-components"
 import Footer from "./Footer"
 import Navbar from "./Navbar"
 import Displaying from "./Displaying"
-import NewHabit from "./NewHabit"
+import CreateHabit from "./CreateHabit"
 import {useState} from "react"
-import Days from "./Days"
+import NewHabit from "./CreateHabit"
+
 
 
 
@@ -28,13 +29,15 @@ export default function Habits({token}){
             {/* Se nao tiver nenhum habito adicionado */}
 
             <Displaying>
-                 {/* Quando clicar no + esse componente NewHabit tem que aparecer*/}
-                <NewHabitWrapper className={selected}>
-                    <NewHabit />
-                </NewHabitWrapper>
+                 {/* Quando clicar no + esse componente NewHabit tem que aparecer
+                <CreateHabitWrapper className={selected}>
+                    <CreateHabit />
+                </CreateHabitWrapper>
                 <NoHabits>
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </NoHabits>
+                */}
+               
             </Displaying>
 
             
@@ -42,7 +45,7 @@ export default function Habits({token}){
         </>
     )
 }
-const NewHabitWrapper= styled.div`
+const CreateHabitWrapper= styled.div`
 
 `
 
