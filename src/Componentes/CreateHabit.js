@@ -5,11 +5,12 @@ import NewHabit from "./NewHabit"
 import axios from "axios"
 
 
-export default function CreateHabit({setHid, hid , setNothing , setHidHabit ,setNewHabit , newHabit ,setSelectedDay , selectedDay , token}){
+export default function CreateHabit({setHid, hid , setNothing , setHidHabit ,setNewHabit , newHabit ,setSelectedDay , selectedDay , token 
+}){
 
     const [selectedCancel , setSelectedCancel]= useState(false)
     const [selectedSave , setSelectedSave]= useState(false)
-    console.log(token)
+   
 
     function createHabitSave(){
 
@@ -34,8 +35,10 @@ export default function CreateHabit({setHid, hid , setNothing , setHidHabit ,set
                 setHid("hid")
                 setNothing("hid")
                 setHidHabit("nothing")
+               
+
             console.log(res.data)     
-           
+          
         })
         .catch(err=>{
             console.log(err)

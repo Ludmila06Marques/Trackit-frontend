@@ -22,13 +22,14 @@ const [newHabit , setNewHabit]=useState("")
 const [selectedDay , setSelectedDay]=useState([])
 
 
+
     return(
         <>
               <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomeScreen email={email} setEmail={setEmail} password={password} setPassword={setPassword} setToken={setToken} />}></Route> 
                 <Route path="/cadastro" element={<RegisterScreen email={email} setEmail={setEmail} password={password} setPassword={setPassword} name={name} setName={setName} image={image} setImage={setImage} />}></Route> 
-                <Route path="/habitos" element={<Habits token={token} hid={hid} setHid={setHid} setNothing={setNothing} nothing={nothing} setHidHabit={setHidHabit} hidHabit={hidHabit} newHabit={newHabit} setNewHabit={setNewHabit} selectedDay={selectedDay} setSelectedDay={setSelectedDay} />} ></Route>
+                <Route path="/habitos" element={<Habits token={token} hid={hid} setHid={setHid} setNothing={setNothing} nothing={nothing} setHidHabit={setHidHabit} hidHabit={hidHabit} newHabit={newHabit} setNewHabit={setNewHabit} selectedDay={selectedDay} setSelectedDay={setSelectedDay}  />} ></Route>
                 <Route path="/historico" element={<History/> }></Route>
                 <Route path="/hoje" element={<Current/> }></Route>
             </Routes>

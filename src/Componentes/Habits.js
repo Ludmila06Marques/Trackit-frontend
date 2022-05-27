@@ -12,13 +12,39 @@ import axios from "axios"
 
 
 
-export default function Habits({token , hid , setHid , setNothing,nothing , hidHabit , setHidHabit , setNewHabit , newHabit , setSelectedDay , selectedDay }){
-    console.log(token)
+export default function Habits({token , hid , setHid , setNothing,nothing , hidHabit , setHidHabit , setNewHabit , newHabit , setSelectedDay , selectedDay  }){
+   
     
+    const [stockHabit , setStockHabit]= useState([])
     function addHabit(){
         setHid("nothing")
     
     }
+
+    useEffect(()=>{
+        const config={
+            headers:{
+              Authorization:`Bearer ${token}`
+            }
+          }
+          
+          
+        
+          const promise= axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits" , config)
+  
+          promise
+          .then(res=>{
+                let habits= res.data
+               
+              setStockHabit(...stockHabit , habits)
+            console.log(stockHabit)
+          })
+          .catch(err=>{
+              console.log(err)
+          })
+      
+        
+    },[])
 
 
 
@@ -40,7 +66,10 @@ export default function Habits({token , hid , setHid , setNothing,nothing , hidH
                 <NoHabits className={nothing}>
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </NoHabits>
-                <NewHabit hidHabit={hidHabit} newHabit={newHabit} setNewHabit={setNewHabit} selectedDay={selectedDay}/>
+
+            
+           {  /*{stockHabit.map((item , index)=> <NewHabit key={index} name={item.name}  hidHabit={hidHabit} newHabit={newHabit} setNewHabit={setNewHabit} selectedDay={selectedDay} />)}*/}
+               
                
                
             </Displaying>

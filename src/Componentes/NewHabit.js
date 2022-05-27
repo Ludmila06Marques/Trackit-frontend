@@ -1,14 +1,16 @@
 import styled from "styled-components"
 import Days from "./Days"
 
-export default function NewHabit({hidHabit , newHabit , setNewHabit}){
+export default function NewHabit({ props ,hidHabit , newHabit , setNewHabit}){
+
+
 
     return(
         <>
         <Wrapper className={hidHabit}>
         <Content  >
             <Icon><ion-icon name="trash-outline"></ion-icon></Icon>
-        <HabitName>{newHabit}</HabitName>
+        <HabitName>{props.name}</HabitName>
         <Days/>
         </Content>
         </Wrapper>
