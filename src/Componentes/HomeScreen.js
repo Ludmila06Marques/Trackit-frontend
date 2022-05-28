@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Link , useNavigate } from "react-router-dom"
 import axios from "axios"
 
-export default function HomeScreen({email , setEmail , password , setPassword , setToken}){
+export default function HomeScreen({email , setEmail , password , setPassword , setToken , setImage}){
 
     const navigate= useNavigate()
     function login(){
@@ -15,6 +15,7 @@ export default function HomeScreen({email , setEmail , password , setPassword , 
           promise
           .then(res=>{
               console.log(res.data)
+              setImage(res.data.image)
               setToken (res.data.token)
               navigate("/hoje")
           })

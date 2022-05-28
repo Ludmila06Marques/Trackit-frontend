@@ -1,7 +1,39 @@
 import styled from "styled-components"
 import Days from "./Days"
+import axios from "axios"
+import { useEffect } from "react"
 
-export default function NewHabit({ props ,hidHabit , newHabit , setNewHabit}){
+export default function NewHabit({hidHabit , newHabit , setNewHabit , name , id , token  , setStockHabit , selectedDay}){
+
+function confirmAsk(){
+ const question= window.confirm("vc tem certeza que quer deletar ?")
+ if(question=== true){
+   deletar()
+ }
+}
+ 
+ function deletar(){
+
+
+    const config={
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }
+        const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}` , config) 
+
+    promise
+    .then(res=>{
+      console.log("deletando")
+     
+      
+      
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
 
 
 
@@ -9,9 +41,10 @@ export default function NewHabit({ props ,hidHabit , newHabit , setNewHabit}){
         <>
         <Wrapper className={hidHabit}>
         <Content  >
-            <Icon><ion-icon name="trash-outline"></ion-icon></Icon>
-        <HabitName>{props.name}</HabitName>
-        <Days/>
+            <Icon onClick={confirmAsk} ><ion-icon name="trash-outline"></ion-icon></Icon>
+        <HabitName>{name}</HabitName>
+       <Days selectedDay={selectedDay}/>
+       {/* {selectedDay.map((item , index)=> <Days key={index} index={index} />)}*/}
         </Content>
         </Wrapper>
         </>
@@ -19,6 +52,8 @@ export default function NewHabit({ props ,hidHabit , newHabit , setNewHabit}){
 }
 
 const Wrapper=styled.div`
+z-index: 0;
+
 `
 
 const Icon=styled.div`
@@ -35,6 +70,7 @@ background-color: #FFFFFF;
 border-radius: 5px;
 padding: 10px;
 position: relative;
+margin-top: 10px;
 
 `
 const HabitName=styled.h1`

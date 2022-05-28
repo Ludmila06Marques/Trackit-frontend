@@ -13,12 +13,14 @@ const [changeColorSexta , setChangeColorSexta]=useState("nothing")
 const [changeColorSabado , setChangeColorSabado]=useState("nothing")
 
 
+
+
     return(
         <>
         <BoxWrapper>
        
         <Box className={changeColorDomingo} onClick={()=>  { setSelectedDay([...selectedDay, 1])
-       setChangeColorDomingo("selected")
+     setChangeColorDomingo("selected")
 
        }}>
             <BoxDay>D</BoxDay>

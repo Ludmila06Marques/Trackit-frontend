@@ -1,11 +1,18 @@
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Navbar(){
+export default function Navbar({image}){
+    const navigate= useNavigate()
+
+    function NavigateToHoje(){
+        navigate("/hoje")
+    }
     return(
+        
         <>
-        <Content>
+        <Content onClick={NavigateToHoje}>
         <Style src="./img/Poster2.png"/>
-        <Poster src="./img/Style.png"/>
+        <Poster src={image}/>
         </Content>
 
         </>
@@ -25,8 +32,13 @@ position: fixed;
 top:0;
 left: 0;
 box-shadow: 1px 1px 1px rgba(0 , 0 , 0 , 0.5);
+
+
 `
 const Poster= styled.img`
+width: 51px;
+height: 51px;
+border-radius: 50px;
 
 `
 const Style = styled.img`

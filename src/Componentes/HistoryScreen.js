@@ -2,7 +2,7 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import Displaying from "./Displaying"
 
-export default function Current(){
+export default function HistoryScreen({image}){
     return(
         <>
          <Footer/>
@@ -10,7 +10,7 @@ export default function Current(){
 
             
         </Displaying>
-        <Navbar/>
+        <Navbar image={image}/>
         </>
     )
 }

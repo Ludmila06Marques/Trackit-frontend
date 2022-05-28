@@ -32,8 +32,10 @@ justify-content: space-between;
 align-items: center;
 padding: 20px;
 position: fixed;
+z-index: 1;
 bottom:0;
 left: 0;
+
 `
 const Historic= styled.h3`
 font-size: 18px;

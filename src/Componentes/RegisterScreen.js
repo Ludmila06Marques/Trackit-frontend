@@ -3,7 +3,7 @@ import { Link  , useNavigate} from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 
-export default function RegisterScreen({email , setEmail , password , setPassword , name , setName , image  , setImage}){
+export default function RegisterScreen({email , setEmail , password , setPassword , name , setName , image  , setImage }){
 
     const navigate= useNavigate()
   function singUp(){
