@@ -3,19 +3,29 @@ import Days from "./Days"
 import { useState } from "react"
 import NewHabit from "./NewHabit"
 import axios from "axios"
+import {ThreeDots} from "react-loader-spinner"
+ /* ERROS PARA RESOLVER :
+  -Nao estou conseguindo limpar o campo dos dias ao mandar o habito
 
+*/
 
 export default function CreateHabit({setHid, hid , setNothing , setHidHabit ,setNewHabit , newHabit ,setSelectedDay , selectedDay , token , stockHabit , setStockHabit
 }){
 
-    const [selectedCancel , setSelectedCancel]= useState(false)
-    const [selectedSave , setSelectedSave]= useState(false)
+ 
+    const [loading , setLoading]=useState(false)
    
     function clean(){
-        setNewHabit("")
+       
+        setLoading(false)
+        setNewHabit("")       
+        setSelectedDay([])       
+    
     }
+   
 
     function createHabitSave(){
+     
 
         const config={
           headers:{
@@ -31,38 +41,41 @@ export default function CreateHabit({setHid, hid , setNothing , setHidHabit ,set
         }
         console.log(body)
         const promise= axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits" , body  , config)
-
-        promise
+         setLoading(true)
+         promise
         .then(res=>{
-                setSelectedSave(true)
+              
                 setHid("hid")
                 setNothing("hid")
                 setHidHabit("nothing")
                 setStockHabit([...stockHabit , body])
-                console.log(stockHabit)
-               clean()
-
-            console.log(res.data)     
+                clean() 
+                
           
         })
+       
         .catch(err=>{
             console.log(err)
+            setLoading(false)
         })
-    }
+      
 
+    }      
     return (
         <>
         <Content>
+
                 <Info>
                     <Name placeholder="Nome do habito"onChange={(e)=> setNewHabit(e.target.value)} value={newHabit} required/>
                     <Days selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
                 </Info>
-            <Buttons>
-                <Cancel  onClick={( )=>{setSelectedCancel(true)
-                setHid("hid")
-                } } selectedCancel={selectedCancel}><h1>Cancelar</h1></Cancel>
-                <Save  onClick={createHabitSave } selectedSave={selectedSave }><h1>Salvar</h1></Save>
-            </Buttons>
+
+                <Buttons>
+                    <Cancel  onClick={()=>setHid("hid")
+                    } ><h1>Cancelar</h1></Cancel>
+                    <Save onClick={createHabitSave } ><h1>{loading ? <ThreeDots color="#52B6FF"/>  : "Salvar"}</h1></Save>
+                </Buttons>
+
         </Content>
 
         </>
@@ -103,7 +116,6 @@ justify-content: flex-end;
 `
 
 const Cancel= styled.div`
-background-color:  ${props => props.selectedCancel ? "#52B6FF" : "#FFFFFF"};
 width: 84px;
 height: 35px;
 border-radius: 5px;
@@ -112,12 +124,13 @@ justify-content: center;
 align-items: center;
 margin-right: 10px;
 h1{
-    color: ${props => props.selectedCancel ? "#FFFFFF" : "#52B6FF"};
+    color: #52B6FF;
     font-size: 16px;
 }
 `
+
 const Save= styled.div`
-background-color:  ${props => props.selectedSave ? "#52B6FF" : "#FFFFFF"};
+
 width: 84px;
 height: 35px;
 border-radius: 5px;
@@ -126,7 +139,7 @@ justify-content: center;
 align-items: center;
 margin-right: 16px;
 h1{
-    color: ${props => props.selectedSave ? "#FFFFFF" : "#52B6FF"};
+
     font-size: 16px;
 }
 `

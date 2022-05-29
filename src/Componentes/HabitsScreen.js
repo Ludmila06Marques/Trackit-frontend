@@ -7,10 +7,6 @@ import {useState , useEffect} from "react"
 import NewHabit from "./NewHabit"
 import axios from "axios"
 
-//Estou com problema com o DELETE , coloquei a variavel de estado dentro do array do useEffect e o delete funciona , so que ele fica atualizando a cada 1 segundo 
-
-
-
 
 export default function HabitsScreen({token , hid , setHid , setNothing,nothing , hidHabit , setHidHabit , setNewHabit , newHabit , setSelectedDay , selectedDay  , stockHabit , setStockHabit , image}){
    
@@ -21,26 +17,26 @@ export default function HabitsScreen({token , hid , setHid , setNothing,nothing 
     
     }
 
-    useEffect(()=>{
-        const config={
-            headers:{
-              Authorization:`Bearer ${token}`
+        useEffect(()=>{
+            const config={
+                headers:{
+                Authorization:`Bearer ${token}`
+                }
             }
-          }
 
-          const promise= axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits" , config)
-  
-          promise
-          .then(res=>{
-              setStockHabit([...res.data])
-          
-          })
-          .catch(err=>{
-              console.log(err)
-          })
-      
+            const promise= axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits" , config)
+    
+            promise
+            .then(res=>{
+                setStockHabit([...res.data])
+            
+            })
+            .catch(err=>{
+                console.log(err)
+            })
         
-    },[stockHabit])
+            
+        },[stockHabit])
 
 
 
@@ -49,54 +45,44 @@ export default function HabitsScreen({token , hid , setHid , setNothing,nothing 
         <>
          <Navbar image={image}/>
          {stockHabit.length ==0
+
          ?
          <Displaying>
-            <ContentUp>
-            <PersonalHabits>Meus habitos</PersonalHabits>
-            <Icon onClick={addHabit} ><ion-icon  name="add-outline"></ion-icon></Icon>
-            </ContentUp>
-            {/* Se nao tiver nenhum habito adicionado */}
-                 {/* Quando clicar no + esse componente NewHabit tem que aparecer */}
+
+                <ContentUp>
+                <PersonalHabits>Meus habitos</PersonalHabits>
+                <Icon onClick={addHabit} ><ion-icon  name="add-outline"></ion-icon></Icon>
+                </ContentUp>
+
                 <CreateHabitWrapper className={hid}>
-                    <CreateHabit setHid={setHid} hid={hid} setNothing={setNothing} setHidHabit={setHidHabit} setNewHabit={setNewHabit} newHabit={newHabit} setSelectedDay={setSelectedDay} selectedDay={selectedDay} token={token} stockHabit={stockHabit} setStockHabit={setStockHabit} />
+                    <CreateHabit  setHid={setHid} hid={hid} setNothing={setNothing} setHidHabit={setHidHabit} setNewHabit={setNewHabit} newHabit={newHabit} setSelectedDay={setSelectedDay} selectedDay={selectedDay} token={token} stockHabit={stockHabit} setStockHabit={setStockHabit} />
                 </CreateHabitWrapper>
+
                 <NoHabits >
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </NoHabits>
 
-            
-    {  stockHabit.map((item , index)=> <NewHabit key={index} name={item.name} id={item.id}  hidHabit={item.hidHabit} newHabit={item.newHabit} setNewHabit={item.setNewHabit} selectedDay={item.selectedDay} token={token} setHidHabit={item.setHidHabit} setStockHabit={item.setStockHabit} stockHabit={item.stockHabit}  />)}
-               
-               
-               
-            </Displaying>
+                 {  stockHabit.map((item , index)=> <NewHabit key={index} name={item.name} id={item.id}  hidHabit={item.hidHabit} newHabit={item.newHabit} setNewHabit={item.setNewHabit} selectedDay={item.selectedDay} token={token} setHidHabit={item.setHidHabit} setStockHabit={item.setStockHabit} stockHabit={item.stockHabit}  />)}
+  
+         </Displaying>
             :
-            <Displaying>
-            <ContentUp>
-            <PersonalHabits>Meus habitos</PersonalHabits>
-            <Icon onClick={addHabit} ><ion-icon  name="add-outline"></ion-icon></Icon>
-            </ContentUp>
-            {/* Se nao tiver nenhum habito adicionado */}
-                 {/* Quando clicar no + esse componente NewHabit tem que aparecer */}
-                <CreateHabitWrapper className={hid}>
-                    <CreateHabit setHid={setHid} hid={hid} setNothing={setNothing} setHidHabit={setHidHabit} setNewHabit={setNewHabit} newHabit={newHabit} setSelectedDay={setSelectedDay} selectedDay={selectedDay} token={token} stockHabit={stockHabit} setStockHabit={setStockHabit} />
-                </CreateHabitWrapper>
-               
+         <Displaying>
 
-            
-    {  stockHabit.map((item , index)=> <NewHabit key={index} name={item.name} id={item.id}  hidHabit={item.hidHabit} newHabit={item.newHabit} setNewHabit={item.setNewHabit} selectedDay={item.selectedDay} token={token} setHidHabit={item.setHidHabit} setStockHabit={item.setStockHabit} stockHabit={item.stockHabit}  />)}
-               
-               
-               
-            </Displaying>
-            
+                <ContentUp>
+                <PersonalHabits>Meus habitos</PersonalHabits>
+                <Icon onClick={addHabit} ><ion-icon  name="add-outline"></ion-icon></Icon>
+                </ContentUp>
 
+                 <CreateHabitWrapper className={hid}>
+                        <CreateHabit setHid={setHid} hid={hid} setNothing={setNothing} setHidHabit={setHidHabit} setNewHabit={setNewHabit} newHabit={newHabit} setSelectedDay={setSelectedDay} selectedDay={selectedDay} token={token} stockHabit={stockHabit} setStockHabit={setStockHabit} />
+                 </CreateHabitWrapper>
+
+                  {  stockHabit.map((item , index)=> <NewHabit key={index} name={item.name} id={item.id}  hidHabit={item.hidHabit} newHabit={item.newHabit} setNewHabit={item.setNewHabit} selectedDay={item.selectedDay} token={token} setHidHabit={item.setHidHabit} setStockHabit={item.setStockHabit} stockHabit={item.stockHabit}  />)}
+                 
+         </Displaying>
         }
-         
-
-           
-
-            <Footer/>  
+        
+         <Footer/>  
       
         </>
     )

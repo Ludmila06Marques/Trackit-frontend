@@ -1,24 +1,56 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-import { CircularProgressbar, CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 
 export default function Footer(props){
     const {score}=props
+
+    const calcColor=(percent , start  , end)=>{
+        let a=percent/100,
+        b=(end-start)*a,
+        c=b+start;
+
+       
+    }
     return(
         <>
         <Content>
-         <Link to="/habitos">
-           <Habits> Habitos</Habits>
-        </Link>
-        <Progress>  
-            <CircularProgressbar/>
-           
-         </Progress>
-        <Link to="/historico">
-           <Historic> Historico</Historic>
-        </Link>
+
+            <Link to="/habitos">
+            <Habits> Habitos</Habits>
+            </Link>
+
+            <Progress>  
+                <CircularProgressbar
+                value={score}
+                text="Hoje"
+                circleRatio={0.7} 
+                styles={{
+                    trail:{
+                        strokeLinecap:"butt",
+                        transform:"rotate(-126deg)",
+                        transformOrigin:"center center"
+                    },
+                    path:{
+                        strokeLinecap:"butt",
+                        transform:"rotate(-126deg)",
+                        transformOrigin:"center center",
+                        stroke: calcColor(score , 0, 120)
+                    },
+                    text:{
+                        fill: "#ddd"
+                    }
+                }}
+                strokeWidth={10}
+                />          
+            </Progress>
+
+            <Link to="/historico">
+            <Historic> Historico</Historic>
+            </Link>
+            
         </Content>
         </>
     )

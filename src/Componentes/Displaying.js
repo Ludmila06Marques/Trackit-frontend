@@ -12,6 +12,4 @@ export default function Displaying(props){
 const DisplayingWrapper= styled.div`
 padding:10px;
 margin-bottom: 70px;
-
-
 `

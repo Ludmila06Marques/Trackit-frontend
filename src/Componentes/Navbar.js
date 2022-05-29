@@ -11,8 +11,8 @@ export default function Navbar({image}){
         
         <>
         <Content onClick={NavigateToHoje}>
-        <Style src="./img/Poster2.png"/>
-        <Poster src={image}/>
+            <Style src="./img/Poster2.png"/>
+            <Poster src={image}/>
         </Content>
 
         </>

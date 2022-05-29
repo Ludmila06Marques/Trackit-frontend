@@ -5,12 +5,17 @@ import axios from "axios"
 import { useEffect , useState} from "react"
 import styled from "styled-components"
 import * as dayjs from 'dayjs'
-//Nao estou conseguindo fazer o post no habito
+ /* ERROS PARA RESOLVER :
+  -Descompletar e ja deixar pintado quando o   done==true
+
+*/
 
 
- function Molde({name , done  , id, setDoneHabit , doneHabit , token }){
+ function Molde({name , done  , id, setDoneHabit , doneHabit , token  ,currentSequence ,highestSequence}){
 
-    function complete(){
+      const [selected , setSelected]=useState(false)
+
+     function complete(){
 
         const config={
             headers:{
@@ -19,17 +24,42 @@ import * as dayjs from 'dayjs'
           }
 
         const promise= axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, null ,config)
+              promise
+              .then(res=>{    
+                if(done==false){
+                  setDoneHabit([...doneHabit , id])
+                  setSelected(true)
+                 
+                  alert("completou")
+                }
+              })
+              .catch(err=>{               
+                alert("voce ja fez")
+                descomplete()
+                  console.log(err)
+                  console.log(config)
+              })
+    }
+    function descomplete(){
+        const config={
+            headers:{
+              Authorization:`Bearer ${token}`
+            }
+          }
+
+        const promise= axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, null ,config)
         promise
-        .then(res=>{
-        setDoneHabit([...doneHabit , id])
-        alert("completou")
-    
+        .then(res=>{         
+        setSelected(false)
+        alert("descompletou")
+        
         
         })
         .catch(err=>{
             console.log(err)
             console.log(config)
         })
+
     }
     console.log(doneHabit)
    
@@ -37,21 +67,20 @@ import * as dayjs from 'dayjs'
         <Wrapper>
         <Texts>
             <TextsTitle>{name}</TextsTitle>
-            <TextsSubTitle>Sequencia atual:</TextsSubTitle>
-            <TextsSubTitle>Seu record:</TextsSubTitle>
+            <TextsSubTitle>Sequencia atual:{currentSequence}</TextsSubTitle>
+            <TextsSubTitle>Seu record:{highestSequence} </TextsSubTitle>
 
         </Texts>
-        <Status onClick={complete} ><ion-icon name="checkmark-outline"></ion-icon></Status>
+        <Status background="EBEBEB" selected={selected} onClick={complete} ><ion-icon name="checkmark-outline"></ion-icon></Status>
 
     </Wrapper>
     )
 }
 
-export default function CurrentScreen({image , token , setCurrentHabit , currentHabit  , doneHabit , setDoneHabit , stockHabit }){
+export default function CurrentScreen({image , token , setCurrentHabit , currentHabit  , doneHabit , setDoneHabit , stockHabit , selectedDay , setSelectedDay}){
     var now = dayjs()
+    
     console.log(now)
-
-  
 
     useEffect(()=>{
         const config={
@@ -64,6 +93,7 @@ export default function CurrentScreen({image , token , setCurrentHabit , current
   
           promise
           .then(res=>{
+              
              setCurrentHabit([...res.data])
              console.log(res.data)
          
@@ -72,11 +102,11 @@ export default function CurrentScreen({image , token , setCurrentHabit , current
           .catch(err=>{
               console.log(err)
           })
-      
+         
         
     },[stockHabit])
     console.log(currentHabit)
-    const day=""
+   
 
 
     return(
@@ -85,16 +115,16 @@ export default function CurrentScreen({image , token , setCurrentHabit , current
         <Displaying>
          <ContentUp>
              <ContentTextI>
-                 {now.$D}/{now.$M+1}</ContentTextI>
+              { now.$D}/{now.$M+1}</ContentTextI>
              {doneHabit.length==0
              ? 
-              <ContentText>Nenhum hábito concluído ainda</ContentText>
+              <ContentText color="#BABABA" >Nenhum hábito concluído ainda</ContentText>
             :
-            <ContentText>{doneHabit.length}/{currentHabit.length} Concluidos</ContentText>
+            <ContentText color="#8FC549">{(doneHabit.length /currentHabit.length)*100}% Concluidos</ContentText>
             }
             
         </ContentUp>   
-      {currentHabit.map((item,index)=><Molde token={token} setCurrentHabit={setCurrentHabit} currentHabit={currentHabit} doneHabit={doneHabit} setDoneHabit={setDoneHabit} done={item.done} id={item.id} name={item.name} key={index} index={index} />)}
+      {currentHabit.map((item,index)=><Molde token={token} setCurrentHabit={setCurrentHabit} currentHabit={currentHabit} doneHabit={doneHabit} setDoneHabit={setDoneHabit} done={item.done} id={item.id} name={item.name} key={index} index={index} currentSequence={item.currentSequence } highestSequence={item.highestSequence} />)}
      
         
         </Displaying>
@@ -106,7 +136,7 @@ const Status= styled.div`
 width: 69px;
 height: 69px;
 border-radius: 5px;
-background-color: #EBEBEB;
+background-color:${props=> props.selected? "#8FC549" : "#EBEBEB"};
 display: flex;
 align-items: center;
 justify-content: center;
@@ -150,8 +180,7 @@ color: #126BA5;
 const ContentText=styled.h3`
 margin-top: 5px;
 font-size: 18px;
-color: 
-#BABABA
+color:${props=>props.color}
 ;
 font-weight: bold;
 `

@@ -2,37 +2,42 @@ import styled from "styled-components"
 import Days from "./Days"
 import axios from "axios"
 import { useEffect } from "react"
+/* ERROS PARA RESOLVER :
+  -Nao estou conseguindo capturar os dias e usalos depois 
 
-export default function NewHabit({hidHabit , newHabit , setNewHabit , name , id , token  , setStockHabit , selectedDay}){
+*/
 
-function confirmAsk(){
- const question= window.confirm("vc tem certeza que quer deletar ?")
- if(question=== true){
-   deletar()
- }
-}
- 
- function deletar(){
+export default function NewHabit({hidHabit , newHabit , setNewHabit , name , id , token  , setStockHabit ,  stockHabit ,selectedDay}){
 
-
-    const config={
-        headers:{
-          Authorization:`Bearer ${token}`
-        }
+    function confirmAsk(){
+    const question= window.confirm("vc tem certeza que quer deletar ?")
+      if(question=== true){
+        deletar()
       }
+    }
+ 
+    function deletar(){
+
+
+        const config={
+            headers:{
+              Authorization:`Bearer ${token}`
+            }
+          }
         const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}` , config) 
 
-    promise
-    .then(res=>{
-      console.log("deletando")
-     
-      
-      
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-}
+              promise
+              .then(res=>{
+                console.log("deletando")
+              })
+              .catch(err=>{
+                  console.log(err)
+              })
+    }
+
+    function chargeColor(){
+      console.log(stockHabit)
+    }
 
 
 
@@ -40,12 +45,11 @@ function confirmAsk(){
     return(
         <>
         <Wrapper className={hidHabit}>
-        <Content  >
+          <Content>
             <Icon onClick={confirmAsk} ><ion-icon name="trash-outline"></ion-icon></Icon>
-        <HabitName>{name}</HabitName>
-       <Days selectedDay={selectedDay}/>
-       {/* {selectedDay.map((item , index)=> <Days key={index} index={index} />)}*/}
-        </Content>
+            <HabitName>{name}</HabitName>
+            <Days selectedDay={selectedDay}/> 
+          </Content>
         </Wrapper>
         </>
     )
