@@ -52,7 +52,7 @@ export default function HomeScreen({email , setEmail , password , setPassword , 
            
                <LogIn loading={loading} onClick={login} > {loading ? <ThreeDots color="white"/>  : "Entrar"} </LogIn>
            
-            <Link to="/cadastro">
+            <Link to="/cadastro"  style={{ textDecoration: 'none' }}>
                <Register>Não tem uma conta? Cadastre-se!</Register>
             </Link>
         </Container>
@@ -60,11 +60,13 @@ export default function HomeScreen({email , setEmail , password , setPassword , 
     )
 }
 
+
 const Container= styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+
 `
 const Poster=styled.img`
 width:180px;
@@ -111,5 +113,6 @@ color:
 #52B6FF;
 margin-top: 25px;
 text-decoration: underline;
+
 
 `

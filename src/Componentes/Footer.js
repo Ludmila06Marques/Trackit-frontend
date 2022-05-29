@@ -67,6 +67,9 @@ position: fixed;
 z-index: 1;
 bottom:0;
 left: 0;
+a{
+    text-decoration: none;
+}
 
 `
 const Historic= styled.h3`
@@ -74,6 +77,7 @@ font-size: 18px;
 color: 
 #52B6FF;
 font-weight: revert;
+
 `
 const Habits= styled.h3`
 font-size: 18px;
