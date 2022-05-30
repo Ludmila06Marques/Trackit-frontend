@@ -28,9 +28,9 @@ import * as dayjs from 'dayjs'
               .then(res=>{    
                 if(done==false){
                   setDoneHabit([...doneHabit , id])
-                  setSelected(true)
-                 
+                  setSelected(true)                 
                   alert("completou")
+                  console.log(doneHabit)
                 }
               })
               .catch(err=>{               
@@ -49,10 +49,11 @@ import * as dayjs from 'dayjs'
 
         const promise= axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`, null ,config)
         promise
-        .then(res=>{         
+        .then(res=>{   
+          setDoneHabit( doneHabit.filter((item) => item !== {id})) 
         setSelected(false)
         alert("descompletou")
-        
+        console.log(doneHabit)
         
         })
         .catch(err=>{
