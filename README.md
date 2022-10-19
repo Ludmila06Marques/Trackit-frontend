@@ -6,7 +6,6 @@
 
 <div display="flex" >
   ![login](https://user-images.githubusercontent.com/102738642/196825479-4736fc23-55ee-43fa-a3aa-aa03f6865623.png)
-
   ![signup](https://user-images.githubusercontent.com/102738642/196825470-55b66989-7130-405b-a0b8-42ec4196287c.png)
   ![habit](https://user-images.githubusercontent.com/102738642/196825374-48f7a560-0a36-46d8-ae66-dce651b3e85f.png)  
   ![habits](https://user-images.githubusercontent.com/102738642/196825502-b8103354-2cc8-493c-ab37-6085f4229b99.png)
