@@ -5,7 +5,9 @@
 <h6>Register, log in and put your habits separated by days of the week</h6>
 
 <div display="flex" >
-  ![login](https://user-images.githubusercontent.com/102738642/196825479-4736fc23-55ee-43fa-a3aa-aa03f6865623.png)
+  ![login](https://user-images.githubusercontent.com/102738642/196826199-de7aff0c-1d6a-4067-ad65-004a24efdecb.png)
+
+
   
   ![signup](https://user-images.githubusercontent.com/102738642/196825470-55b66989-7130-405b-a0b8-42ec4196287c.png)
   
