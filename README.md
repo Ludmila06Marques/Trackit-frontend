@@ -8,7 +8,7 @@
 
 
 <img src="./trackit/login.png" width="250" />
-<img src="./trackit/login.png" width="250" />
+<img src="./trackit/home.png" width="250" />
   
 <img src="./trackit/habit.png" width="250" />
 
