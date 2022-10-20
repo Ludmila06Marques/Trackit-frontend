@@ -7,17 +7,17 @@
 <div  float="left">
 
 
-<img src="./trackit/login.png" width="200" />
+<img src="./trackit/login.png" width="250" />
   
-<img src="./trackit/habit.png" width="200" />
+<img src="./trackit/habit.png" width="250" />
 
-<img src="./trackit/habits.png" width="200" />
+<img src="./trackit/habits.png" width="250" />
 
-<img src="./trackit/history.png" width="200" />
+<img src="./trackit/history.png" width="250" />
 
-<img src="./trackit/home.png" width="200" />
+<img src="./trackit/home.png" width="250" />
 
-<img src="./trackit/login.png" width="200" />
+<img src="./trackit/login.png" width="250" />
 
 
 
