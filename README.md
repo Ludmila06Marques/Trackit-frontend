@@ -4,19 +4,21 @@
 
 <h6>Register, log in and put your habits separated by days of the week</h6>
 
-<div display="flex">
+<div  float="left">
 
-  ![signup](/trackit/login.png)
-  
-  ![habit](/trackit/habit.png) 
-  
-  ![habits](/trackit/habits.png)
-  
-  ![history](/trackit/history.png)
-  
-  ![home](/trackit/home.png)
 
-  ![login](/trackit/login.png)
+<img src="./trackit/login.png" width="200" />
+  
+<img src="./trackit/habit.png" width="200" />
+
+<img src="./trackit/habits.png" width="200" />
+
+<img src="./trackit/history.png" width="200" />
+
+<img src="./trackit/home.png" width="200" />
+
+<img src="./trackit/login.png" width="200" />
+
 
 
 </div>
